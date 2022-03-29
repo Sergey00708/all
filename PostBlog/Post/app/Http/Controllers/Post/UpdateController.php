@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers\Post;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StoreRequest;
+use App\Models\post;
+
+class UpdateController extends BaseController
+{
+    public function __invoke(StoreRequest $request, post $post)
+    {
+        $data = $request->validated();
+
+        $this->service->update($data, $post);
+
+        return redirect()->route('post.show', $post->id);
+    }
+}
